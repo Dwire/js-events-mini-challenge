@@ -4,7 +4,7 @@ console.log("Here's your header:", header)
 
 
 /***** Deliverable 2 *****/
-header.style.color = "green"
+header.style.color = "red"
 
 
 /***** Deliverable 3 *****/
@@ -59,14 +59,66 @@ animalToRemove.remove()
 /************************** EVENTS JS MINI CHALLENGE ******************************/
 
 /***** Deliverable 1 *****/
-function toggleColor(element) {
-    if (element.style.color === "green") {
-        element.style.color = "black"
+
+
+header.addEventListener('click', toggleColor)
+
+function toggleColor(event) {
+    let element = event.target
+    
+    if (element.style.color === "black") {
+        element.style.color = "red"
     } else {
-        element.style.color = "green"
+        element.style.color = "black"
     }
 }
 
 /***** Deliverable 2 *****/
 
+let likeBtn = document.querySelector(".like-button")
+
+likeBtn.addEventListener("click", increaseLikes)
+
+
+function increaseLikes(e){
+    let likeP = e.target.parentElement.querySelector('.likes')
+    let likeText = likeP.innerText
+    let likeCount = parseInt(likeText.split(" ")[0])
+
+    let likesPlusOne = likeCount + 1
+    
+    likeP.textContent = `${likesPlusOne} likes`  
+}
+
 /***** Deliverable 3 *****/
+
+const form = document.querySelector("form#new-animal-sighting-form")
+form.addEventListener("submit", getFormData)
+
+
+function getFormData(e){
+    e.preventDefault()
+
+    let description = e.target.description.value
+    let photo = e.target.photo.value
+    let link = e.target.link.value
+    let species = e.target.species.value
+    let id = 5
+
+
+    
+    // const animalObj = { id, species, photo, link, description }
+    const animalObj = {
+        id: id, 
+        species: species, 
+        photo: photo, 
+        link:  link, 
+        description: description 
+    }
+    
+    renderAnimalSightingPost(animalObj)
+    
+}
+
+
+
